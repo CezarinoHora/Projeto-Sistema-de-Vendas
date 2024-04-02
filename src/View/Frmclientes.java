@@ -4,6 +4,11 @@
  */
 package View;
 
+import dao.ClientesDao;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.Clientes;
+
 /**
  *
  * @author Cezarino Hora
@@ -13,6 +18,28 @@ public class Frmclientes extends javax.swing.JFrame {
     /**
      * Creates new form Frmclientes
      */
+    // Metodo listar na tabela
+    public void listar(){
+        
+        ClientesDao dao = new ClientesDao();
+        List<Clientes> lista = dao.listarClientes();
+        DefaultTableModel dados = (DefaultTableModel) tabelaClientes.getModel();
+        dados.setNumRows(0);
+        
+        for (Clientes c:lista){
+        dados.addRow(new Object[]{
+            c.getId_cliente(),
+            c.getNome(),
+            c.getCpf(),
+            c.getEmail(),
+            c.getTelefone(),
+            c.getCep(),
+            c.getEndereco(),
+            c.getCidade(),
+            c.getUf()
+         });
+        }
+    }
     public Frmclientes() {
         initComponents();
     }
@@ -36,30 +63,35 @@ public class Frmclientes extends javax.swing.JFrame {
         txtnome = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtemail = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        ftxtfone = new javax.swing.JFormattedTextField();
-        ftxtcpf = new javax.swing.JFormattedTextField();
+        txtfone = new javax.swing.JFormattedTextField();
+        txtcpf = new javax.swing.JFormattedTextField();
         jLabel7 = new javax.swing.JLabel();
-        ftxtcep = new javax.swing.JFormattedTextField();
+        txtcep = new javax.swing.JFormattedTextField();
         txtendereco = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtcidade = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         cbuf = new javax.swing.JComboBox<>();
+        btnNovo = new javax.swing.JButton();
+        btnsalvar = new javax.swing.JButton();
+        btneditar = new javax.swing.JButton();
+        btnexcluir = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        tabelaClientes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 204));
 
@@ -122,55 +154,55 @@ public class Frmclientes extends javax.swing.JFrame {
         jLabel5.setText("Email:");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
 
-        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        txtemail.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtemail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                txtemailActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 526, 30));
+        jPanel2.add(txtemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 526, 30));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Telefone:");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 150, -1, -1));
 
         try {
-            ftxtfone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
+            txtfone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        ftxtfone.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jPanel2.add(ftxtfone, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 150, 210, 30));
+        txtfone.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jPanel2.add(txtfone, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 150, 210, 30));
 
         try {
-            ftxtcpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            txtcpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        ftxtcpf.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        ftxtcpf.addActionListener(new java.awt.event.ActionListener() {
+        txtcpf.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtcpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ftxtcpfActionPerformed(evt);
+                txtcpfActionPerformed(evt);
             }
         });
-        jPanel2.add(ftxtcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 80, 200, 30));
+        jPanel2.add(txtcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 80, 200, 30));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("CEP:");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
 
         try {
-            ftxtcep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+            txtcep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        ftxtcep.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        ftxtcep.addActionListener(new java.awt.event.ActionListener() {
+        txtcep.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtcep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ftxtcepActionPerformed(evt);
+                txtcepActionPerformed(evt);
             }
         });
-        jPanel2.add(ftxtcep, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 200, 30));
+        jPanel2.add(txtcep, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 200, 30));
 
         txtendereco.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtendereco.addActionListener(new java.awt.event.ActionListener() {
@@ -204,6 +236,37 @@ public class Frmclientes extends javax.swing.JFrame {
         cbuf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MT", "SP", "MS", " " }));
         jPanel2.add(cbuf, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 300, 100, -1));
 
+        btnNovo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnNovo.setText("+ NOVO");
+        jPanel2.add(btnNovo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 470, 110, 60));
+
+        btnsalvar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnsalvar.setText("SALVAR");
+        btnsalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsalvarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnsalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 470, 110, 60));
+
+        btneditar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btneditar.setText("EDITAR");
+        btneditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneditarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btneditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 470, 120, 60));
+
+        btnexcluir.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnexcluir.setText("EXCLUIR");
+        btnexcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnexcluirActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnexcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 470, 120, 60));
+
         jTabbedPane1.addTab("Dados Pessoais", jPanel2);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -224,32 +287,20 @@ public class Frmclientes extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Código", "Nome", "CPF", "Email", "Telefone", "CEP", "Endereço", "Cidade", "UF"
+                "Código", "Nome", "CPF", "Email", "Telefone", "CEP", "Endereco", "Cidade", "UF"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jButton2.setText("SALVAR");
-
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jButton3.setText("EDITAR");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+        tabelaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaClientesMouseClicked(evt);
             }
         });
-
-        jButton4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jButton4.setText("EXCLUIR");
-
-        jButton5.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jButton5.setText("NOVO");
+        jScrollPane1.setViewportView(tabelaClientes);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -265,18 +316,8 @@ public class Frmclientes extends javax.swing.JFrame {
                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
                         .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 584, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(412, 412, 412)
-                .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(27, 27, 27)
-                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(482, 482, 482))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,14 +328,8 @@ public class Frmclientes extends javax.swing.JFrame {
                     .addComponent(jLabel11)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+                .addGap(73, 73, 73))
         );
 
         jTabbedPane1.addTab("Consulta de Clientes", jPanel3);
@@ -314,8 +349,8 @@ public class Frmclientes extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -329,17 +364,17 @@ public class Frmclientes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtnomeActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void txtemailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtemailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_txtemailActionPerformed
 
-    private void ftxtcpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxtcpfActionPerformed
+    private void txtcpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcpfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ftxtcpfActionPerformed
+    }//GEN-LAST:event_txtcpfActionPerformed
 
-    private void ftxtcepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxtcepActionPerformed
+    private void txtcepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcepActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ftxtcepActionPerformed
+    }//GEN-LAST:event_txtcepActionPerformed
 
     private void txtenderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtenderecoActionPerformed
         // TODO add your handling code here:
@@ -357,9 +392,77 @@ public class Frmclientes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btneditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditarActionPerformed
+        // botão Editar
+        Clientes obj = new Clientes();
+
+        obj.setNome(txtnome.getText());
+        obj.setCpf(txtcpf.getText());
+        obj.setEmail(txtemail.getText());
+        obj.setTelefone(txtfone.getText());
+        obj.setCep(txtcep.getText());
+        obj.setEndereco(txtendereco.getText());
+        obj.setCidade(txtcidade.getText());
+        obj.setUf(cbuf.getSelectedItem().toString());
+
+        obj.setId_cliente(Integer.parseInt(txtcodigo.getText()));
+
+        ClientesDao dao = new ClientesDao();
+
+        dao.alterarCliente(obj);
+       
+        
+    }//GEN-LAST:event_btneditarActionPerformed
+
+    private void btnsalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalvarActionPerformed
+        // botão salvar
+ 
+        Clientes obj = new Clientes();
+
+        obj.setNome(txtnome.getText());
+        obj.setCpf(txtcpf.getText());
+        obj.setEmail(txtemail.getText());
+        obj.setTelefone(txtfone.getText());
+        obj.setCep(txtcep.getText());
+        obj.setEndereco(txtendereco.getText());
+        obj.setCidade(txtcidade.getText());
+        obj.setUf(cbuf.getSelectedItem().toString());
+
+        ClientesDao dao = new ClientesDao();
+
+        dao.cadastrarCliente(obj);
+
+    }//GEN-LAST:event_btnsalvarActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // Carrega a lista
+        listar();
+    }//GEN-LAST:event_formWindowActivated
+
+    private void tabelaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaClientesMouseClicked
+        // Pega os dados
+        jTabbedPane1.setSelectedIndex(0);
+        txtcodigo.setText(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(),0).toString());
+        txtnome.setText(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(),1).toString());
+        txtcpf.setText(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(),2).toString());
+        txtemail.setText(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(),3).toString());
+        txtfone.setText(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(),4).toString());
+        txtcep.setText(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(),5).toString());
+        txtendereco.setText(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(),6).toString());
+        txtcidade.setText(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(),7).toString());
+        cbuf.setSelectedItem(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(),8).toString());
+    }//GEN-LAST:event_tabelaClientesMouseClicked
+
+    private void btnexcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexcluirActionPerformed
+        // botão excluir
+         Clientes obj = new Clientes();
+
+        obj.setId_cliente(Integer.parseInt(txtcodigo.getText()));
+
+        ClientesDao dao = new ClientesDao();
+
+        dao.excluirCliente(obj);
+    }//GEN-LAST:event_btnexcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -397,15 +500,12 @@ public class Frmclientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnNovo;
+    private javax.swing.JButton btneditar;
+    private javax.swing.JButton btnexcluir;
+    private javax.swing.JButton btnsalvar;
     private javax.swing.JComboBox<String> cbuf;
-    private javax.swing.JFormattedTextField ftxtcep;
-    private javax.swing.JFormattedTextField ftxtcpf;
-    private javax.swing.JFormattedTextField ftxtfone;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -422,12 +522,15 @@ public class Frmclientes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTable tabelaClientes;
+    private javax.swing.JFormattedTextField txtcep;
     private javax.swing.JTextField txtcidade;
     private javax.swing.JTextField txtcodigo;
+    private javax.swing.JFormattedTextField txtcpf;
+    private javax.swing.JTextField txtemail;
     private javax.swing.JTextField txtendereco;
+    private javax.swing.JFormattedTextField txtfone;
     private javax.swing.JTextField txtnome;
     // End of variables declaration//GEN-END:variables
 }
