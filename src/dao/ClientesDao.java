@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import jdbc.ConnectionFactory;
 import model.Clientes;
 
-/**
+/*
  *
  * @author Cezarino Hora
  */

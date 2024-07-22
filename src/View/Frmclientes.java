@@ -9,7 +9,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.Clientes;
 
-/**
+/*
  *
  * @author Cezarino Hora
  */
