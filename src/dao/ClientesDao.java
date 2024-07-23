@@ -88,7 +88,7 @@ public class ClientesDao {
         
     }
 
-    //Metodo ExcluirCliente
+    /*Metodo ExcluirCliente (antigo)
     public void excluirCliente(Clientes obj) {
         
         try {
@@ -110,8 +110,35 @@ public class ClientesDao {
             JOptionPane.showMessageDialog(null, "Erro: " + erro);
         }
 
-    }
+    }*/
 
+    // Método ExcluirCliente
+    public void excluirCliente(Clientes obj) {
+        int confirmacao = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir este cliente?", "Confirmação de Exclusão", JOptionPane.YES_NO_OPTION);
+
+        if (confirmacao == JOptionPane.YES_OPTION) {
+            try {
+                // 1 passo - Criar o comando sql
+                String sql = "delete from tb_cliente where id_cliente = ?";
+
+                // 2 passo - conectar o banco de dados e organizar o comando sql
+                PreparedStatement stmt = con.prepareStatement(sql);
+                stmt.setInt(1, obj.getId_cliente());
+
+                // 3 passo - executar o comando sql
+                stmt.execute();
+                stmt.close();
+
+                JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
+
+            } catch (SQLException erro) {
+                JOptionPane.showMessageDialog(null, "Erro: " + erro);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Exclusão cancelada.");
+        }
+    }
+     
     //Metodo Listar Todos os Clientes
     public List<Clientes> listarClientes() {
         try {
@@ -120,7 +147,7 @@ public class ClientesDao {
             List<Clientes> lista = new ArrayList<>();
 
             //2 passo - criar o sql
-            String sql = "select * from tb_cliente";
+            String sql = "select * from tb_cliente order by nome";
             PreparedStatement stmt = con.prepareStatement(sql);
 
             ResultSet rs = stmt.executeQuery();
@@ -151,4 +178,43 @@ public class ClientesDao {
 
     }
 
+        //Metodo Buscar cliente por nome
+        public List<Clientes> BuscaClientePorNome(String nome) {
+        try {
+
+            //1 passo criar a lista
+            List<Clientes> lista = new ArrayList<>();
+
+            //2 passo - criar o sql
+            String sql = "select * from tb_cliente where nome like ? order by nome";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1,nome);
+            
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Clientes obj = new Clientes();
+
+                obj.setId_cliente(rs.getInt("id_cliente"));
+                obj.setNome(rs.getString("nome"));
+                obj.setCpf(rs.getString("cpf"));
+                obj.setEmail(rs.getString("email"));
+                obj.setTelefone(rs.getString("telefone"));
+                obj.setCep(rs.getString("cep"));
+                obj.setEndereco(rs.getString("endereco"));
+                obj.setCidade(rs.getString("cidade"));
+                obj.setUf(rs.getString("uf"));
+
+                lista.add(obj);
+            }
+            return lista;
+
+        } catch (SQLException erro) {
+
+            JOptionPane.showMessageDialog(null, "Erro: " + erro);
+            return null;
+
+        }
+
+    }
 }
