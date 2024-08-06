@@ -8,6 +8,7 @@ import dao.ClientesDao;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.Clientes;
+import model.Utilitario;
 
 /*
  *
@@ -56,7 +57,14 @@ public class Frmclientes extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        txtpesquisa = new javax.swing.JTextField();
+        btnpesquisar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaClientes = new javax.swing.JTable();
+        btnNovoCadastroCliente = new javax.swing.JButton();
+        Painel_Dados = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtcodigo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -75,21 +83,18 @@ public class Frmclientes extends javax.swing.JFrame {
         txtcidade = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         cbuf = new javax.swing.JComboBox<>();
-        btnNovo = new javax.swing.JButton();
-        btnsalvar = new javax.swing.JButton();
-        btneditar = new javax.swing.JButton();
+        btncadastranovo = new javax.swing.JButton();
+        btnsalva = new javax.swing.JButton();
         btnexcluir = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        txtpesquisa = new javax.swing.JTextField();
-        btnpesquisar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaClientes = new javax.swing.JTable();
+        btnsair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -119,158 +124,8 @@ public class Frmclientes extends javax.swing.JFrame {
 
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Código:");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 43, -1, -1));
-
-        txtcodigo.setEditable(false);
-        txtcodigo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        txtcodigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtcodigoActionPerformed(evt);
-            }
-        });
-        jPanel2.add(txtcodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 43, 91, 30));
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setText("Nome:");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 86, -1, -1));
-
-        txtnome.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        txtnome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtnomeActionPerformed(evt);
-            }
-        });
-        jPanel2.add(txtnome, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 526, 30));
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setText("CPF:");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 80, -1, 20));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setText("Email:");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
-
-        txtemail.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        txtemail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtemailActionPerformed(evt);
-            }
-        });
-        jPanel2.add(txtemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 526, 30));
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel6.setText("Telefone:");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 150, -1, -1));
-
-        try {
-            txtfone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtfone.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jPanel2.add(txtfone, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 150, 210, 30));
-
-        try {
-            txtcpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtcpf.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        txtcpf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtcpfActionPerformed(evt);
-            }
-        });
-        jPanel2.add(txtcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 80, 200, 30));
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel7.setText("CEP:");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
-
-        try {
-            txtcep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtcep.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        txtcep.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtcepActionPerformed(evt);
-            }
-        });
-        jPanel2.add(txtcep, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 200, 30));
-
-        txtendereco.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        txtendereco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtenderecoActionPerformed(evt);
-            }
-        });
-        jPanel2.add(txtendereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 526, 30));
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel8.setText("Endereço:");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, -1, -1));
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel9.setText("Cidade:");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, -1));
-
-        txtcidade.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        txtcidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtcidadeActionPerformed(evt);
-            }
-        });
-        jPanel2.add(txtcidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 330, 30));
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel10.setText("UF:");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 300, -1, -1));
-
-        cbuf.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        cbuf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MT", "SP", "MS", " " }));
-        jPanel2.add(cbuf, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 300, 100, -1));
-
-        btnNovo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        btnNovo.setText("+ NOVO");
-        jPanel2.add(btnNovo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 470, 110, 60));
-
-        btnsalvar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        btnsalvar.setText("SALVAR");
-        btnsalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnsalvarActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnsalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 470, 110, 60));
-
-        btneditar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        btneditar.setText("ALTERAR");
-        btneditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btneditarActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btneditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 470, 120, 60));
-
-        btnexcluir.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        btnexcluir.setText("EXCLUIR");
-        btnexcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnexcluirActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnexcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 470, 120, 60));
-
-        jTabbedPane1.addTab("Dados Pessoais", jPanel2);
-
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel11.setText("Nome:");
+        jLabel11.setText("Nome do Cliente:");
 
         txtpesquisa.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtpesquisa.addActionListener(new java.awt.event.ActionListener() {
@@ -307,6 +162,14 @@ public class Frmclientes extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabelaClientes);
 
+        btnNovoCadastroCliente.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnNovoCadastroCliente.setText("CADASTRAR NOVO CLIENTE");
+        btnNovoCadastroCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoCadastroClienteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -319,10 +182,14 @@ public class Frmclientes extends javax.swing.JFrame {
                         .addComponent(jLabel11)
                         .addGap(18, 18, 18)
                         .addComponent(txtpesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
+                        .addGap(18, 18, 18)
                         .addComponent(btnpesquisar)
-                        .addGap(0, 584, Short.MAX_VALUE)))
+                        .addGap(0, 510, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(448, 448, 448)
+                .addComponent(btnNovoCadastroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,12 +199,169 @@ public class Frmclientes extends javax.swing.JFrame {
                     .addComponent(txtpesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
                     .addComponent(btnpesquisar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
-                .addGap(73, 73, 73))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnNovoCadastroCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                .addGap(21, 21, 21))
         );
 
         jTabbedPane1.addTab("Consulta de Clientes", jPanel3);
+
+        Painel_Dados.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Código:");
+        Painel_Dados.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 43, -1, -1));
+
+        txtcodigo.setEditable(false);
+        txtcodigo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtcodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcodigoActionPerformed(evt);
+            }
+        });
+        Painel_Dados.add(txtcodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 43, 91, 30));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setText("Nome:");
+        Painel_Dados.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 86, -1, -1));
+
+        txtnome.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtnome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnomeActionPerformed(evt);
+            }
+        });
+        Painel_Dados.add(txtnome, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 526, 30));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setText("CPF:");
+        Painel_Dados.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 80, -1, 20));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setText("Email:");
+        Painel_Dados.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
+
+        txtemail.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtemail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtemailActionPerformed(evt);
+            }
+        });
+        Painel_Dados.add(txtemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 526, 30));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setText("Telefone:");
+        Painel_Dados.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 150, -1, -1));
+
+        try {
+            txtfone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtfone.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        Painel_Dados.add(txtfone, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 150, 210, 30));
+
+        try {
+            txtcpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtcpf.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtcpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcpfActionPerformed(evt);
+            }
+        });
+        Painel_Dados.add(txtcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 80, 200, 30));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setText("CEP:");
+        Painel_Dados.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
+
+        try {
+            txtcep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtcep.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtcep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcepActionPerformed(evt);
+            }
+        });
+        Painel_Dados.add(txtcep, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 200, 30));
+
+        txtendereco.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtendereco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtenderecoActionPerformed(evt);
+            }
+        });
+        Painel_Dados.add(txtendereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 526, 30));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel8.setText("Endereço:");
+        Painel_Dados.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel9.setText("Cidade:");
+        Painel_Dados.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, -1));
+
+        txtcidade.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtcidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcidadeActionPerformed(evt);
+            }
+        });
+        Painel_Dados.add(txtcidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 330, 30));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel10.setText("UF:");
+        Painel_Dados.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 300, -1, -1));
+
+        cbuf.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        cbuf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MT", "SP", "MS", " " }));
+        Painel_Dados.add(cbuf, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 300, 100, -1));
+
+        btncadastranovo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btncadastranovo.setText("CADASTRA NOVO CLIENTE");
+        btncadastranovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncadastranovoActionPerformed(evt);
+            }
+        });
+        Painel_Dados.add(btncadastranovo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 470, 280, 60));
+
+        btnsalva.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnsalva.setText("SALVA ALTERAÇÃO");
+        btnsalva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsalvaActionPerformed(evt);
+            }
+        });
+        Painel_Dados.add(btnsalva, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 470, 200, 60));
+
+        btnexcluir.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnexcluir.setText("EXCLUIR");
+        btnexcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnexcluirActionPerformed(evt);
+            }
+        });
+        Painel_Dados.add(btnexcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 470, 120, 60));
+
+        btnsair.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnsair.setText("SAIR");
+        btnsair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsairActionPerformed(evt);
+            }
+        });
+        Painel_Dados.add(btnsair, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 470, 120, 60));
+
+        jTabbedPane1.addTab("Dados Pessoais", Painel_Dados);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -417,7 +441,7 @@ public class Frmclientes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnpesquisarActionPerformed
 
-    private void btneditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditarActionPerformed
+    private void btnsalvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalvaActionPerformed
         // botão Editar
         Clientes obj = new Clientes();
 
@@ -435,11 +459,14 @@ public class Frmclientes extends javax.swing.JFrame {
         ClientesDao dao = new ClientesDao();
 
         dao.alterarCliente(obj);
+        
+        new Utilitario().LimpaTela(Painel_Dados);
+        jTabbedPane1.setSelectedIndex(0);
        
         
-    }//GEN-LAST:event_btneditarActionPerformed
+    }//GEN-LAST:event_btnsalvaActionPerformed
 
-    private void btnsalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalvarActionPerformed
+    private void btncadastranovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncadastranovoActionPerformed
         // botão salvar
  
         Clientes obj = new Clientes();
@@ -456,8 +483,11 @@ public class Frmclientes extends javax.swing.JFrame {
         ClientesDao dao = new ClientesDao();
 
         dao.cadastrarCliente(obj);
+        
+        new Utilitario().LimpaTela(Painel_Dados);
+        jTabbedPane1.setSelectedIndex(0);
 
-    }//GEN-LAST:event_btnsalvarActionPerformed
+    }//GEN-LAST:event_btncadastranovoActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // Carrega a lista
@@ -466,7 +496,7 @@ public class Frmclientes extends javax.swing.JFrame {
 
     private void tabelaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaClientesMouseClicked
         // Pega os dados
-        jTabbedPane1.setSelectedIndex(0);
+        jTabbedPane1.setSelectedIndex(1);
         txtcodigo.setText(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(),0).toString());
         txtnome.setText(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(),1).toString());
         txtcpf.setText(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(),2).toString());
@@ -487,6 +517,10 @@ public class Frmclientes extends javax.swing.JFrame {
         ClientesDao dao = new ClientesDao();
 
         dao.excluirCliente(obj);
+        
+        new Utilitario().LimpaTela(Painel_Dados);
+        
+        jTabbedPane1.setSelectedIndex(0);
     }//GEN-LAST:event_btnexcluirActionPerformed
 
     private void txtpesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpesquisaKeyPressed
@@ -512,6 +546,22 @@ public class Frmclientes extends javax.swing.JFrame {
          });
         }
     }//GEN-LAST:event_txtpesquisaKeyPressed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnNovoCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoCadastroClienteActionPerformed
+        // TODO add your handling code here:
+        new Utilitario().LimpaTela(Painel_Dados);
+        jTabbedPane1.setSelectedIndex(1);
+    }//GEN-LAST:event_btnNovoCadastroClienteActionPerformed
+
+    private void btnsairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsairActionPerformed
+        // TODO add your handling code here:
+        new Utilitario().LimpaTela(Painel_Dados);
+        jTabbedPane1.setSelectedIndex(0);
+    }//GEN-LAST:event_btnsairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -549,11 +599,13 @@ public class Frmclientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnNovo;
-    private javax.swing.JButton btneditar;
+    private javax.swing.JPanel Painel_Dados;
+    private javax.swing.JButton btnNovoCadastroCliente;
+    private javax.swing.JButton btncadastranovo;
     private javax.swing.JButton btnexcluir;
     private javax.swing.JButton btnpesquisar;
-    private javax.swing.JButton btnsalvar;
+    private javax.swing.JButton btnsair;
+    private javax.swing.JButton btnsalva;
     private javax.swing.JComboBox<String> cbuf;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -567,7 +619,6 @@ public class Frmclientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;

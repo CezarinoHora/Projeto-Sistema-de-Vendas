@@ -25,34 +25,41 @@ public class ClientesDao {
     }
 
     //Metodo cadastrarCliente
-    public void cadastrarCliente(Clientes obj) {
+    if (txtcodigo.getText().isEmpty()) { // Verifica se txtcodigo está vazio
         try {
-            //1 passo - criar o comando sql
-            String sql = "insert into tb_cliente (nome,cpf,email,telefone,cep,endereco,cidade,uf) "
-                    + ""
-                    + "values (?,?,?,?,?,?,?,?)";
+            public void cadastrarCliente(Clientes obj) {
+            try {
+                //1 passo - criar o comando sql
+                String sql = "insert into tb_cliente (nome,cpf,email,telefone,cep,endereco,cidade,uf) "
+                        + ""
+                        + "values (?,?,?,?,?,?,?,?)";
 
-            //2 passo - conectar o banco de dados e organizar o comando sql
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, obj.getNome());
-            stmt.setString(2, obj.getCpf());
-            stmt.setString(3, obj.getEmail());
-            stmt.setString(4, obj.getTelefone());
-            stmt.setString(5, obj.getCep());
-            stmt.setString(6, obj.getEndereco());
-            stmt.setString(7, obj.getCidade());
-            stmt.setString(8, obj.getUf());
+                //2 passo - conectar o banco de dados e organizar o comando sql
+                PreparedStatement stmt = con.prepareStatement(sql);
+                stmt.setString(1, obj.getNome());
+                stmt.setString(2, obj.getCpf());
+                stmt.setString(3, obj.getEmail());
+                stmt.setString(4, obj.getTelefone());
+                stmt.setString(5, obj.getCep());
+                stmt.setString(6, obj.getEndereco());
+                stmt.setString(7, obj.getCidade());
+                stmt.setString(8, obj.getUf());
 
-            //3 passo - executar o comando sql
-            stmt.execute();
-            stmt.close();
+                //3 passo - executar o comando sql
+                stmt.execute();
+                stmt.close();
 
-            JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
+                JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
 
-        } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Erro: " + erro);
+            } catch (SQLException erro) {
+                JOptionPane.showMessageDialog(null, "Erro: " + erro);
+                }
+            }
+        }else {
+            JOptionPane.showMessageDialog(null, "Código já cadastrado!");
+        }            
+        
         }
-    }
 
     //Metodo AlterarCliente
     public void alterarCliente(Clientes obj) {
