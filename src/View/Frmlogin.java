@@ -4,6 +4,9 @@
  */
 package View;
 
+import dao.FuncionariosDao;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Cezarino Hora
@@ -35,7 +38,7 @@ public class Frmlogin extends javax.swing.JFrame {
         btnentrar = new javax.swing.JButton();
         btnsair = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Seja Bem Vindo ao Sistema de Vendas 1.0 - Autenticação");
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 204));
@@ -43,7 +46,7 @@ public class Frmlogin extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(0, 0, 255));
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Autenticação de Usuário");
+        jLabel1.setText("Autenticação de Usuários");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -79,6 +82,11 @@ public class Frmlogin extends javax.swing.JFrame {
 
         btnentrar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnentrar.setText("ENTRAR");
+        btnentrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnentrarActionPerformed(evt);
+            }
+        });
 
         btnsair.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnsair.setText("SAIR");
@@ -139,6 +147,24 @@ public class Frmlogin extends javax.swing.JFrame {
     private void txtemailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtemailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtemailActionPerformed
+
+    private void btnentrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnentrarActionPerformed
+        // Botão Entrar
+        try {
+            String email, senha;
+            email=txtemail.getText();
+            senha=txtsenha.getText();
+            
+            FuncionariosDao dao = new FuncionariosDao();
+            
+            dao.efetuaLogin(email,senha);
+            this.dispose();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "erro");
+
+        }
+    }//GEN-LAST:event_btnentrarActionPerformed
 
     /**
      * @param args the command line arguments

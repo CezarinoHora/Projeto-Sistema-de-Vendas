@@ -82,10 +82,6 @@ public class ClientesDao {
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro: " + erro);
         }
-
-        
-        
-        
     }
 
     /*Metodo ExcluirCliente (antigo)

@@ -225,7 +225,7 @@ public class Frmclientes extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Nome:");
-        Painel_Dados.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 86, -1, -1));
+        Painel_Dados.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, -1, -1));
 
         txtnome.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtnome.addActionListener(new java.awt.event.ActionListener() {
@@ -233,11 +233,11 @@ public class Frmclientes extends javax.swing.JFrame {
                 txtnomeActionPerformed(evt);
             }
         });
-        Painel_Dados.add(txtnome, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 526, 30));
+        Painel_Dados.add(txtnome, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 526, 30));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("CPF:");
-        Painel_Dados.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 80, -1, 20));
+        Painel_Dados.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, 20));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Email:");
@@ -274,7 +274,7 @@ public class Frmclientes extends javax.swing.JFrame {
                 txtcpfActionPerformed(evt);
             }
         });
-        Painel_Dados.add(txtcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 80, 200, 30));
+        Painel_Dados.add(txtcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 200, 30));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("CEP:");
@@ -326,7 +326,7 @@ public class Frmclientes extends javax.swing.JFrame {
         Painel_Dados.add(cbuf, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 300, 100, -1));
 
         btncadastranovo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        btncadastranovo.setText("CADASTRA NOVO CLIENTE");
+        btncadastranovo.setText("CADASTRAR NOVO CLIENTE");
         btncadastranovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncadastranovoActionPerformed(evt);
@@ -335,7 +335,7 @@ public class Frmclientes extends javax.swing.JFrame {
         Painel_Dados.add(btncadastranovo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 470, 280, 60));
 
         btnsalva.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        btnsalva.setText("SALVA ALTERAÇÃO");
+        btnsalva.setText("SALVAR ALTERAÇÃO");
         btnsalva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnsalvaActionPerformed(evt);
