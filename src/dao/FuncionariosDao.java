@@ -235,7 +235,7 @@ public class FuncionariosDao {
                 //Usuário Logou corretamente
                 JOptionPane.showMessageDialog(null,"Seja bem vindo ao Sistema de Vendas");
                 Frmmenu tela = new Frmmenu();
-                tela.usuariologado = rs.getString("nome");
+                tela.usuariologado = rs.getString("nome");               
                 tela.setVisible(true);
                 
             }else{
