@@ -232,7 +232,7 @@ public class FuncionariosDao {
             ResultSet rs = stmt.executeQuery();
             
             if(rs.next()){
-                //Usuário Logou
+                //Usuário Logou corretamente
                 JOptionPane.showMessageDialog(null,"Seja bem vindo ao Sistema de Vendas");
                 Frmmenu tela = new Frmmenu();
                 tela.usuariologado = rs.getString("nome");
