@@ -4,6 +4,7 @@
  */
 package dao;
 
+import View.Frmlogin;
 import View.Frmmenu;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -235,12 +236,13 @@ public class FuncionariosDao {
                 //Usuário Logou corretamente
                 JOptionPane.showMessageDialog(null,"Seja bem vindo ao Sistema de Vendas");
                 Frmmenu tela = new Frmmenu();
-                tela.usuariologado = rs.getString("nome");               
+                tela.usuariologado = rs.getString("nome");
                 tela.setVisible(true);
                 
             }else{
                 //Dados Incorretos
                 JOptionPane.showMessageDialog(null,"Dados Incorretos");
+                new Frmlogin().setVisible(true);
             }
             
         }catch(SQLException erro){
