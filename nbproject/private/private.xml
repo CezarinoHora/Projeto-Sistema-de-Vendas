@@ -3,14 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/REPO/NetBeansProjects/Projeto%20Sistema%20de%20Vendas/src/dao/FuncionariosDao.java</file>
-            <file>file:/C:/REPO/NetBeansProjects/Projeto%20Sistema%20de%20Vendas/src/View/Frmclientes.java</file>
-            <file>file:/C:/REPO/NetBeansProjects/Projeto%20Sistema%20de%20Vendas/src/model/Clientes.java</file>
-            <file>file:/C:/REPO/NetBeansProjects/Projeto%20Sistema%20de%20Vendas/src/View/frmFuncionarios.java</file>
-            <file>file:/C:/REPO/NetBeansProjects/Projeto%20Sistema%20de%20Vendas/src/View/Frmmenu.java</file>
-            <file>file:/C:/REPO/NetBeansProjects/Projeto%20Sistema%20de%20Vendas/src/dao/ClientesDao.java</file>
-            <file>file:/C:/REPO/NetBeansProjects/Projeto%20Sistema%20de%20Vendas/src/View/Frmlogin.java</file>
-            <file>file:/C:/REPO/NetBeansProjects/Projeto%20Sistema%20de%20Vendas/src/model/Funcionarios.java</file>
+            <file>file:/C:/REPO/NetBeansProjects/Projeto-Sistema-de-Vendas/src/View/FrmFornecedores.java</file>
+            <file>file:/C:/REPO/NetBeansProjects/Projeto-Sistema-de-Vendas/src/View/Frmclientes.java</file>
+            <file>file:/C:/REPO/NetBeansProjects/Projeto-Sistema-de-Vendas/src/model/Funcionarios.java</file>
+            <file>file:/C:/REPO/NetBeansProjects/Projeto-Sistema-de-Vendas/src/dao/FornecedoresDao.java</file>
+            <file>file:/C:/REPO/NetBeansProjects/Projeto-Sistema-de-Vendas/src/dao/FuncionariosDao.java</file>
+            <file>file:/C:/REPO/NetBeansProjects/Projeto-Sistema-de-Vendas/src/model/Fornecedores.java</file>
+            <file>file:/C:/REPO/NetBeansProjects/Projeto-Sistema-de-Vendas/src/dao/ClientesDao.java</file>
+            <file>file:/C:/REPO/NetBeansProjects/Projeto-Sistema-de-Vendas/src/View/frmFuncionarios.java</file>
         </group>
     </open-files>
 </project-private>
