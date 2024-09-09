@@ -213,4 +213,40 @@ public class ClientesDao {
         }
 
     }
+        
+        //Metodo Buscar cliente por CPF
+        public Clientes Buscaporcpf(String cpf) {
+        try {
+
+            //1 passo - criar o sql, organizar e executar
+            String sql = "select * from tb_cliente where cpf = ?" ;
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1,cpf);
+            
+            ResultSet rs = stmt.executeQuery();
+            Clientes obj = new Clientes();
+
+            if (rs.next()) {
+
+                obj.setId_cliente(rs.getInt("id_cliente"));
+                obj.setNome(rs.getString("nome"));
+                obj.setCpf(rs.getString("cpf"));
+                obj.setEmail(rs.getString("email"));
+                obj.setTelefone(rs.getString("telefone"));
+                obj.setCep(rs.getString("cep"));
+                obj.setEndereco(rs.getString("endereco"));
+                obj.setCidade(rs.getString("cidade"));
+                obj.setUf(rs.getString("uf"));
+
+            }
+            return obj;
+
+        } catch (SQLException erro) {
+
+            JOptionPane.showMessageDialog(null, "Erro: " + erro);
+            return null;
+
+        }
+
+    }
 }

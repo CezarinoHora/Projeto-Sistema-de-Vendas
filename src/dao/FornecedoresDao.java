@@ -193,8 +193,43 @@ public class FornecedoresDao {
 
     }
     
-    //Metodo Buscar cliente por nome
-        public List<Fornecedores> BuscaFornecedoresPorNome(String nome) {
+    //Metodo Buscar fornecedor por nome
+        public Fornecedores BuscaFornecedoresPorNome(String nome) {
+        try {
+
+            //1 passo - criar o sql, organizar e executar
+            String sql = "select * from tb_fornecedor where nome = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1,nome);
+            
+            ResultSet rs = stmt.executeQuery();
+            Fornecedores obj = new Fornecedores();
+
+            if(rs.next()) {
+                
+                obj.setId_cliente(rs.getInt("id_forn"));
+                obj.setNome(rs.getString("nome"));
+                obj.setCnpj(rs.getString("cnpj"));
+                obj.setEmail(rs.getString("email"));
+                obj.setTelefone(rs.getString("telefone"));
+                obj.setCep(rs.getString("cep"));
+                obj.setEndereco(rs.getString("endereco"));
+                obj.setCidade(rs.getString("cidade"));
+                obj.setUf(rs.getString("uf"));
+            }
+            return obj;
+
+        } catch (SQLException erro) {
+
+            JOptionPane.showMessageDialog(null, "Erro: " + erro);
+            return null;
+
+        }
+
+    }
+
+    //Metodo Pesquisar Fornecedores por nome
+    public List<Fornecedores> PesquisarFornecedoresPorNome(String nome) {
         try {
 
             //1 passo criar a lista
@@ -210,9 +245,9 @@ public class FornecedoresDao {
             while (rs.next()) {
                 Fornecedores obj = new Fornecedores();
 
-                obj.setId_cliente(rs.getInt("id_forn"));
+                obj.setId_forn(rs.getInt("id_forn"));
                 obj.setNome(rs.getString("nome"));
-                obj.setCnpj(rs.getString("cnpj"));
+                obj.setCnpj(rs.getString("Cnpj"));
                 obj.setEmail(rs.getString("email"));
                 obj.setTelefone(rs.getString("telefone"));
                 obj.setCep(rs.getString("cep"));

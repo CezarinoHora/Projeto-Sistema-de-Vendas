@@ -322,7 +322,7 @@ public class Frmclientes extends javax.swing.JFrame {
         Painel_Dados.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 300, -1, -1));
 
         cbuf.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        cbuf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MT", "SP", "MS", " " }));
+        cbuf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MT", "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO" }));
         Painel_Dados.add(cbuf, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 300, 100, -1));
 
         btncadastranovo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N

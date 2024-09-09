@@ -4,41 +4,45 @@
  */
 package View;
 
+import dao.ClientesDao;
 import dao.FornecedoresDao;
+import dao.ProdutosDao;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import model.Clientes;
 import model.Fornecedores;
+import model.Produtos;
 import model.Utilitario;
 
 /*
  *
  * @author Cezarino Hora
  */
-public class FrmFornecedores extends javax.swing.JFrame {
+public class FrmProdutos extends javax.swing.JFrame {
 
+    /**
+     * Creates new form FrmProdutos
+     */
     // Metodo listar na tabela
     public void listar(){
         
-        FornecedoresDao dao = new FornecedoresDao();
-        List<Fornecedores> lista = dao.listarFornecedores();
-        DefaultTableModel dados = (DefaultTableModel) tabelaFornecedores.getModel();
+        ProdutosDao dao = new ProdutosDao();
+        List<Produtos> lista = dao.listarProdutos();
+        DefaultTableModel dados = (DefaultTableModel) tabelaProduto.getModel();
         dados.setNumRows(0);
         
-        for (Fornecedores c:lista){
+        for (Produtos c:lista){
         dados.addRow(new Object[]{
-            c.getId_forn(),
-            c.getNome(),
-            c.getCnpj(),
-            c.getEmail(),
-            c.getTelefone(),
-            c.getCep(),
-            c.getEndereco(),
-            c.getCidade(),
-            c.getUf()
+            c.getId_prod(),
+            c.getDescricao(),
+            c.getQtd_estoque(),
+            c.getVlr_preco(),
+            c.getFornecedor().getNome()
+
          });
         }
     }
-    public FrmFornecedores() {
+    public FrmProdutos() {
         initComponents();
     }
 
@@ -59,31 +63,23 @@ public class FrmFornecedores extends javax.swing.JFrame {
         txtpesquisa = new javax.swing.JTextField();
         btnpesquisar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaFornecedores = new javax.swing.JTable();
+        tabelaProduto = new javax.swing.JTable();
         btnNovoCadastroCliente = new javax.swing.JButton();
         Painel_Dados = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtcodigo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtnome = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        txtqtdestoque = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtemail = new javax.swing.JTextField();
+        txtpreco = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtfone = new javax.swing.JFormattedTextField();
-        txtcnpj = new javax.swing.JFormattedTextField();
-        jLabel7 = new javax.swing.JLabel();
-        txtcep = new javax.swing.JFormattedTextField();
-        txtendereco = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        txtcidade = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        cbuf = new javax.swing.JComboBox<>();
+        cbfornecedor = new javax.swing.JComboBox();
         btncadastranovo = new javax.swing.JButton();
         btnsalva = new javax.swing.JButton();
         btnexcluir = new javax.swing.JButton();
         btnsair = new javax.swing.JButton();
+        txtdescricao = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -100,7 +96,7 @@ public class FrmFornecedores extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(0, 0, 255));
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Cadastro de Fornecedores");
+        jLabel1.setText("Cadastro de Produtos");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -122,7 +118,7 @@ public class FrmFornecedores extends javax.swing.JFrame {
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel11.setText("Nome do Fornecedor:");
+        jLabel11.setText("Descrição Produto:");
 
         txtpesquisa.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtpesquisa.addActionListener(new java.awt.event.ActionListener() {
@@ -144,23 +140,23 @@ public class FrmFornecedores extends javax.swing.JFrame {
             }
         });
 
-        tabelaFornecedores.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Código", "Nome", "CNPJ", "Email", "Telefone", "CEP", "Endereco", "Cidade", "UF"
+                "Código", "Descrição", "Qtd. Estoque", "Preço", "Fornecedor"
             }
         ));
-        tabelaFornecedores.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabelaProduto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaFornecedoresMouseClicked(evt);
+                tabelaProdutoMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tabelaFornecedores);
+        jScrollPane1.setViewportView(tabelaProduto);
 
         btnNovoCadastroCliente.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        btnNovoCadastroCliente.setText("CADASTRAR NOVO FORNECEDOR");
+        btnNovoCadastroCliente.setText("CADASTRAR NOVO PRODUTO");
         btnNovoCadastroCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNovoCadastroClienteActionPerformed(evt);
@@ -181,11 +177,11 @@ public class FrmFornecedores extends javax.swing.JFrame {
                         .addComponent(txtpesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnpesquisar)
-                        .addGap(0, 476, Short.MAX_VALUE)))
+                        .addGap(0, 499, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(448, 448, 448)
-                .addComponent(btnNovoCadastroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnNovoCadastroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -203,13 +199,13 @@ public class FrmFornecedores extends javax.swing.JFrame {
                 .addGap(21, 21, 21))
         );
 
-        jTabbedPane1.addTab("Consulta de Fornecedores", jPanel3);
+        jTabbedPane1.addTab("Consulta de Produtos", jPanel3);
 
         Painel_Dados.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Código:");
-        Painel_Dados.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
+        Painel_Dados.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
 
         txtcodigo.setEditable(false);
         txtcodigo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -218,118 +214,60 @@ public class FrmFornecedores extends javax.swing.JFrame {
                 txtcodigoActionPerformed(evt);
             }
         });
-        Painel_Dados.add(txtcodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 43, 91, 30));
+        Painel_Dados.add(txtcodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 91, 30));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setText("Nome:");
-        Painel_Dados.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, -1, -1));
+        jLabel3.setText("Descrição:");
+        Painel_Dados.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, -1, -1));
 
-        txtnome.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        txtnome.addActionListener(new java.awt.event.ActionListener() {
+        txtqtdestoque.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtqtdestoque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtnomeActionPerformed(evt);
+                txtqtdestoqueActionPerformed(evt);
             }
         });
-        Painel_Dados.add(txtnome, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 526, 30));
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setText("CNPJ:");
-        Painel_Dados.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, 20));
+        Painel_Dados.add(txtqtdestoque, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 130, 30));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setText("Email:");
-        Painel_Dados.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
+        jLabel5.setText("Preço:");
+        Painel_Dados.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, -1, -1));
 
-        txtemail.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        txtemail.addActionListener(new java.awt.event.ActionListener() {
+        txtpreco.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtpreco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtemailActionPerformed(evt);
+                txtprecoActionPerformed(evt);
             }
         });
-        Painel_Dados.add(txtemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 526, 30));
+        Painel_Dados.add(txtpreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, 210, 30));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel6.setText("Telefone:");
-        Painel_Dados.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 150, -1, -1));
-
-        try {
-            txtfone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtfone.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        Painel_Dados.add(txtfone, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 150, 210, 30));
-
-        try {
-            txtcnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtcnpj.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        txtcnpj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtcnpjActionPerformed(evt);
-            }
-        });
-        Painel_Dados.add(txtcnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 200, 30));
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel7.setText("CEP:");
-        Painel_Dados.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
-
-        try {
-            txtcep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtcep.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        txtcep.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtcepActionPerformed(evt);
-            }
-        });
-        Painel_Dados.add(txtcep, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 200, 30));
-
-        txtendereco.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        txtendereco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtenderecoActionPerformed(evt);
-            }
-        });
-        Painel_Dados.add(txtendereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 526, 30));
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel8.setText("Endereço:");
-        Painel_Dados.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, -1, -1));
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel9.setText("Cidade:");
-        Painel_Dados.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, -1));
-
-        txtcidade.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        txtcidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtcidadeActionPerformed(evt);
-            }
-        });
-        Painel_Dados.add(txtcidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 330, 30));
+        jLabel6.setText("Qtd. Estoque:");
+        Painel_Dados.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel10.setText("UF:");
-        Painel_Dados.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 300, -1, -1));
+        jLabel10.setText("Fornecedor:");
+        Painel_Dados.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
 
-        cbuf.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        cbuf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MT", "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO" }));
-        Painel_Dados.add(cbuf, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 300, 100, -1));
+        cbfornecedor.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        cbfornecedor.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                cbfornecedorAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        Painel_Dados.add(cbfornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 270, -1));
 
         btncadastranovo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        btncadastranovo.setText("CADASTRAR NOVO FORNECEDOR");
+        btncadastranovo.setText("CADASTRAR NOVO PRODUTO");
         btncadastranovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncadastranovoActionPerformed(evt);
             }
         });
-        Painel_Dados.add(btncadastranovo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 470, 300, 60));
+        Painel_Dados.add(btncadastranovo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 470, 280, 60));
 
         btnsalva.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnsalva.setText("SALVAR ALTERAÇÃO");
@@ -358,7 +296,15 @@ public class FrmFornecedores extends javax.swing.JFrame {
         });
         Painel_Dados.add(btnsair, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 470, 120, 60));
 
-        jTabbedPane1.addTab("Dados dos Fornecedores", Painel_Dados);
+        txtdescricao.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtdescricao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtdescricaoActionPerformed(evt);
+            }
+        });
+        Painel_Dados.add(txtdescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 526, 30));
+
+        jTabbedPane1.addTab("Dados do Produto", Painel_Dados);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -386,29 +332,13 @@ public class FrmFornecedores extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtcodigoActionPerformed
 
-    private void txtnomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnomeActionPerformed
+    private void txtqtdestoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtqtdestoqueActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtnomeActionPerformed
+    }//GEN-LAST:event_txtqtdestoqueActionPerformed
 
-    private void txtemailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtemailActionPerformed
+    private void txtprecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtprecoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtemailActionPerformed
-
-    private void txtcnpjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcnpjActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtcnpjActionPerformed
-
-    private void txtcepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcepActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtcepActionPerformed
-
-    private void txtenderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtenderecoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtenderecoActionPerformed
-
-    private void txtcidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtcidadeActionPerformed
+    }//GEN-LAST:event_txtprecoActionPerformed
 
     private void txtpesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpesquisaActionPerformed
         // TODO add your handling code here:
@@ -416,70 +346,66 @@ public class FrmFornecedores extends javax.swing.JFrame {
 
     private void btnpesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisarActionPerformed
         // TODO add your handling code here:
-        String nome = "%" +txtpesquisa.getText()+ "%";
+        String descricao = "%" +txtpesquisa.getText()+ "%";
         
-       FornecedoresDao dao = new FornecedoresDao();
-        List<Fornecedores> lista = dao.PesquisarFornecedoresPorNome(nome);
-        DefaultTableModel dados = (DefaultTableModel) tabelaFornecedores.getModel();
+        ProdutosDao dao = new ProdutosDao();
+        List<Produtos> lista = dao.listarProdutosPorNome(descricao);
+        DefaultTableModel dados = (DefaultTableModel) tabelaProduto.getModel();
         dados.setNumRows(0);
         
-        for (Fornecedores c:lista){
+        for (Produtos c:lista){
         dados.addRow(new Object[]{
-            c.getId_forn(),
-            c.getNome(),
-            c.getCnpj(),
-            c.getEmail(),
-            c.getTelefone(),
-            c.getCep(),
-            c.getEndereco(),
-            c.getCidade(),
-            c.getUf()
+            c.getId_prod(),
+            c.getDescricao(),
+            c.getQtd_estoque(),
+            c.getVlr_preco(),
+            c.getFornecedor().getNome()
+
          });
         }
     }//GEN-LAST:event_btnpesquisarActionPerformed
 
     private void btnsalvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalvaActionPerformed
-        // botão Editar
-        Fornecedores obj = new Fornecedores();
+        // botão Salvar Alteração
 
-        obj.setNome(txtnome.getText());
-        obj.setCnpj(txtcnpj.getText());
-        obj.setEmail(txtemail.getText());
-        obj.setTelefone(txtfone.getText());
-        obj.setCep(txtcep.getText());
-        obj.setEndereco(txtendereco.getText());
-        obj.setCidade(txtcidade.getText());
-        obj.setUf(cbuf.getSelectedItem().toString());
+        Produtos obj = new Produtos();
 
-        obj.setId_forn(Integer.parseInt(txtcodigo.getText()));
-
-        FornecedoresDao dao = new FornecedoresDao();
-
-        dao.alterarFornecedor(obj);
+        obj.setId_prod(Integer.parseInt(txtcodigo.getText()));
+        obj.setDescricao(txtdescricao.getText());
+        obj.setQtd_estoque(Integer.parseInt(txtqtdestoque.getText()));
+        obj.setVlr_preco(Double.parseDouble(txtpreco.getText()));
+        
+        //Criar um objeto de Fornecedor
+        Fornecedores f = new Fornecedores();
+        f = (Fornecedores) cbfornecedor.getSelectedItem();
+        
+        obj.setFornecedor(f);
+        
+        ProdutosDao dao = new ProdutosDao();
+        dao.alterar(obj);
         
         new Utilitario().LimpaTela(Painel_Dados);
         jTabbedPane1.setSelectedIndex(0);
-       
+        
         
     }//GEN-LAST:event_btnsalvaActionPerformed
 
     private void btncadastranovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncadastranovoActionPerformed
-        // botão cadastrar novo fornecedor
+        // botão salvar
  
-        Fornecedores obj = new Fornecedores();
+        Produtos obj = new Produtos();
 
-        obj.setNome(txtnome.getText());
-        obj.setCnpj(txtcnpj.getText());
-        obj.setEmail(txtemail.getText());
-        obj.setTelefone(txtfone.getText());
-        obj.setCep(txtcep.getText());
-        obj.setEndereco(txtendereco.getText());
-        obj.setCidade(txtcidade.getText());
-        obj.setUf(cbuf.getSelectedItem().toString());
-
-        FornecedoresDao dao = new FornecedoresDao();
-
-        dao.cadastrarFornecedores(obj);
+        obj.setDescricao(txtdescricao.getText());
+        obj.setQtd_estoque(Integer.parseInt(txtqtdestoque.getText()));
+        obj.setVlr_preco(Double.parseDouble(txtpreco.getText()));
+        
+        //Criar um objeto de Fornecedor
+        Fornecedores f = new Fornecedores();
+        f = (Fornecedores) cbfornecedor.getSelectedItem();
+        obj.setFornecedor(f);
+        
+        ProdutosDao dao = new ProdutosDao();
+        dao.cadastrar(obj);
         
         new Utilitario().LimpaTela(Painel_Dados);
         jTabbedPane1.setSelectedIndex(0);
@@ -491,29 +417,32 @@ public class FrmFornecedores extends javax.swing.JFrame {
         listar();
     }//GEN-LAST:event_formWindowActivated
 
-    private void tabelaFornecedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaFornecedoresMouseClicked
+    private void tabelaProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaProdutoMouseClicked
         // Pega os dados
         jTabbedPane1.setSelectedIndex(1);
-        txtcodigo.setText(tabelaFornecedores.getValueAt(tabelaFornecedores.getSelectedRow(),0).toString());
-        txtnome.setText(tabelaFornecedores.getValueAt(tabelaFornecedores.getSelectedRow(),1).toString());
-        txtcnpj.setText(tabelaFornecedores.getValueAt(tabelaFornecedores.getSelectedRow(),2).toString());
-        txtemail.setText(tabelaFornecedores.getValueAt(tabelaFornecedores.getSelectedRow(),3).toString());
-        txtfone.setText(tabelaFornecedores.getValueAt(tabelaFornecedores.getSelectedRow(),4).toString());
-        txtcep.setText(tabelaFornecedores.getValueAt(tabelaFornecedores.getSelectedRow(),5).toString());
-        txtendereco.setText(tabelaFornecedores.getValueAt(tabelaFornecedores.getSelectedRow(),6).toString());
-        txtcidade.setText(tabelaFornecedores.getValueAt(tabelaFornecedores.getSelectedRow(),7).toString());
-        cbuf.setSelectedItem(tabelaFornecedores.getValueAt(tabelaFornecedores.getSelectedRow(),8).toString());
-    }//GEN-LAST:event_tabelaFornecedoresMouseClicked
+        txtcodigo.setText(tabelaProduto.getValueAt(tabelaProduto.getSelectedRow(),0).toString());
+        txtdescricao.setText(tabelaProduto.getValueAt(tabelaProduto.getSelectedRow(),1).toString());
+        txtqtdestoque.setText(tabelaProduto.getValueAt(tabelaProduto.getSelectedRow(),2).toString());
+        txtpreco.setText(tabelaProduto.getValueAt(tabelaProduto.getSelectedRow(),3).toString());
+        
+        Fornecedores f = new Fornecedores();
+        FornecedoresDao dao = new FornecedoresDao();
+        f = dao.BuscaFornecedoresPorNome(tabelaProduto.getValueAt(tabelaProduto.getSelectedRow(),4).toString());
+        
+        cbfornecedor.removeAllItems();
+        cbfornecedor.getModel().setSelectedItem(f);
+        
+    }//GEN-LAST:event_tabelaProdutoMouseClicked
 
     private void btnexcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexcluirActionPerformed
         // botão excluir
-         Fornecedores obj = new Fornecedores();
+         Produtos obj = new Produtos();
 
-        obj.setId_forn(Integer.parseInt(txtcodigo.getText()));
+        obj.setId_prod(Integer.parseInt(txtcodigo.getText()));
 
-        FornecedoresDao dao = new FornecedoresDao();
+        ProdutosDao dao = new ProdutosDao();
 
-        dao.excluirFornecedores(obj);
+        dao.excluir(obj);
         
         new Utilitario().LimpaTela(Painel_Dados);
         
@@ -522,24 +451,21 @@ public class FrmFornecedores extends javax.swing.JFrame {
 
     private void txtpesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpesquisaKeyPressed
         // TODO add your handling code here:
-        String nome = "%" +txtpesquisa.getText()+ "%";
+        String descricao = "%" +txtpesquisa.getText()+ "%";
         
-        FornecedoresDao dao = new FornecedoresDao();
-        List<Fornecedores> lista = dao.PesquisarFornecedoresPorNome(nome);
-        DefaultTableModel dados = (DefaultTableModel) tabelaFornecedores.getModel();
+        ProdutosDao dao = new ProdutosDao();
+        List<Produtos> lista = dao.listarProdutosPorNome(descricao);
+        DefaultTableModel dados = (DefaultTableModel) tabelaProduto.getModel();
         dados.setNumRows(0);
         
-        for (Fornecedores c:lista){
+        for (Produtos c:lista){
         dados.addRow(new Object[]{
-            c.getId_forn(),
-            c.getNome(),
-            c.getCnpj(),
-            c.getEmail(),
-            c.getTelefone(),
-            c.getCep(),
-            c.getEndereco(),
-            c.getCidade(),
-            c.getUf()
+            c.getId_prod(),
+            c.getDescricao(),
+            c.getQtd_estoque(),
+            c.getVlr_preco(),
+            c.getFornecedor().getNome()
+
          });
         }
     }//GEN-LAST:event_txtpesquisaKeyPressed
@@ -560,6 +486,24 @@ public class FrmFornecedores extends javax.swing.JFrame {
         jTabbedPane1.setSelectedIndex(0);
     }//GEN-LAST:event_btnsairActionPerformed
 
+    private void txtdescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdescricaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtdescricaoActionPerformed
+
+    private void cbfornecedorAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cbfornecedorAncestorAdded
+        //Carregando combobox fornecedores
+        FornecedoresDao dao = new FornecedoresDao();
+        List<Fornecedores> listadefornecedores = dao.listarFornecedores();
+        cbfornecedor.removeAll();
+        
+        for (Fornecedores f : listadefornecedores){
+            cbfornecedor.addItem(f);
+
+        }
+        
+        
+    }//GEN-LAST:event_cbfornecedorAncestorAdded
+
     /**
      * @param args the command line arguments
      */
@@ -577,13 +521,13 @@ public class FrmFornecedores extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmFornecedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmFornecedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmFornecedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmFornecedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -591,7 +535,7 @@ public class FrmFornecedores extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmFornecedores().setVisible(true);
+                new FrmProdutos().setVisible(true);
             }
         });
     }
@@ -604,31 +548,23 @@ public class FrmFornecedores extends javax.swing.JFrame {
     private javax.swing.JButton btnpesquisar;
     private javax.swing.JButton btnsair;
     private javax.swing.JButton btnsalva;
-    private javax.swing.JComboBox<String> cbuf;
+    private javax.swing.JComboBox cbfornecedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable tabelaFornecedores;
-    private javax.swing.JFormattedTextField txtcep;
-    private javax.swing.JTextField txtcidade;
-    private javax.swing.JFormattedTextField txtcnpj;
+    private javax.swing.JTable tabelaProduto;
     private javax.swing.JTextField txtcodigo;
-    private javax.swing.JTextField txtemail;
-    private javax.swing.JTextField txtendereco;
-    private javax.swing.JFormattedTextField txtfone;
-    private javax.swing.JTextField txtnome;
+    private javax.swing.JTextField txtdescricao;
     private javax.swing.JTextField txtpesquisa;
+    private javax.swing.JTextField txtpreco;
+    private javax.swing.JTextField txtqtdestoque;
     // End of variables declaration//GEN-END:variables
 }
